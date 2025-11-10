@@ -135,4 +135,4 @@ dmypy.json
 csv
 /tmp
 *.csv
-
+*.db
