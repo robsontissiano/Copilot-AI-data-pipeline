@@ -2,12 +2,12 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route("/", method=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def index():
     result = ""
     if request.method == "POST":
         text = request.form["text"]
-        result = f"ProcessedL {text.upper()}"
+        result = f"Processed: {text.upper()}"
 
     return render_template("index.html", result=result)
 
