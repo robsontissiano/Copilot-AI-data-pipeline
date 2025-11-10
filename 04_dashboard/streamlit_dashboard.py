@@ -1,13 +1,20 @@
 import streamlit as st
 import pandas as pd
+import os
 
 st.title("Copilot AI - Prompt Evaluation Dashboard")
 st.write("Visualizing experiment metrics from synthetic data.")
 
-data = pd.read_csv("03_experiments/metrics/prompt_evaluation.csv")
-st.dataframe(data)
+file_path = "03_experiments/metrics/prompt_evaluation.csv"
 
-st.subheader("Accuracy per Prompt")
+if os.path.exists(file_path):
+    data = pd.read_csv(file_path)
+    st.dataframe(data)
 
-st.subheader("Latency (ms) per Prompt")
-st.line_chart(data.set_index("Prompt")["Latency_ms"])
+    st.subheader("Accuracy per Prompt")
+
+    st.subheader("Latency (ms) per Prompt")
+    st.line_chart(data.set_index("Prompt")["Latency_ms"])
+else:
+    st.warning(f"File not found: {file_path}")
+    st.info("Please ensure the CSV file exists and rerun the app.")
